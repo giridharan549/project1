@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="infosecure.css"/>
+        <title>user sign up</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" >
+            var attempt=3;
+            function chkpass()
+            {
+                var init=document.getElementById("first");
+                var sec=document.getElementById("second");
+                if(init.value == "")
+                {
+                    alert("You did not enter a password \n" + "please enter one now");
+                    init.focus();
+                    return false;
+                }
+                if(init.value !== sec.value)
+                {
+                    alert("The passwords you entered are not the same \n");
+                    init.focus();
+                    init.select();
+                    return false;
+                }
+                else 
+                   return true;
+           }
+    
+    </script>  
+    </head>
+    <body>
+        <h1>INFOSECURE</h1>
+        <h2 align="center"> File sharing made easier </h2>
+        <div>
+            <p>
+                <a href="home.html">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="group.html">Group</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="groupuser.html">Group User</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="groupadmin.html">Group Admin</a> > <a href="groupadminsignup.html">Sign Up</a>
+            </p>
+            <h3 align="center">Enter your valid details</h3>
+       
+            <form action="insert1.php" method="POST">
+                <p>
+                    Email-ID:<input type="text" name="email"   required/><br />
+                    D.O.B:<input type="text" name="dob" size="10"  placeholder="DD/MM/YY" required/><br />
+                    User name:<input type="text" name="uname" size="20"  required/><br />
+                 Password:<input id="first" type="password" name="pass"  size="10" onkeyup="CheckPasswordStrength(this.value)"  required/><span id="password_strength"></span><br />
+                <br />
+                    Verify password:<input id="second" type="password" name="vpass"  size="10" required/><br />
+                    <div class="tim">
+                        <button type="reset" class="btn-lg btn-primary">&nbsp;<i class="fa fa-undo" aria-hidden="true">&nbsp;Reset&nbsp;</i></button>&nbsp;&nbsp;
+                        <button type="submit" name="submit" onclick="chkpass()" class="btn-lg btn-primary"><i class="fa fa-chevron-circle-right" aria-hidden="true">&nbsp;Submit</i></button>
+                    </div>
+            </form>
+        </div>
+        <script type="text/javascript">
+    function CheckPasswordStrength(password) 
+    {       
+        var password_strength = document.getElementById("password_strength");
+         //TextBox left blank.
+            if (password.length == 0) {
+                password_strength.innerHTML = "";
+                return;
+            }
+
+            //Regular Expressions.
+            var regex = new Array();
+            regex.push("[A-Z]"); //Uppercase Alphabet.
+            regex.push("[a-z]"); //Lowercase Alphabet.
+            regex.push("[0-9]"); //Digit.
+            regex.push("[$@$!%*#?&]"); //Special Character.
+
+            var passed = 0;
+
+            //Validate for each Regular Expression.
+            for (var i = 0; i < regex.length; i++) {
+                if (new RegExp(regex[i]).test(password)) {
+                    passed++;
+                }
+            }
+
+            //Validate for length of Password.
+            if (passed > 2 && password.length > 8) {
+                passed++;
+            }
+
+            //Display status.
+            var color = "";
+            var strength = "";
+            switch (passed) {
+                case 0:
+                case 1:
+                    strength = "Weak";
+                    color = "red";
+                    break;
+                case 2:
+                    strength = "Good";
+                    color = "darkorange";
+                    break;
+                case 3:
+                case 4:
+                    strength = "Strong";
+                    color = "green";
+                    break;
+                case 5:
+                    strength = "Very Strong";
+                    color = "darkgreen";
+                    break;
+            }
+            password_strength.innerHTML = strength;
+            password_strength.style.color = color;
+        
+    }
+        </script>
+    </body>
+</html>
